@@ -1,7 +1,7 @@
 {
     "name": "pxt-robotcar",
     "version": "0.0.3",
-    "description": "",
+    "description": "Easy extension to control the Keyestudio Robot Car for micro:bit.",
     "dependencies": {
         "core": "*",
         "pca9685": "github:jdarling/pxt-pca9685#3d08a2d73002bf8d3525894bb731bc8fe82f6673"
@@ -14,5 +14,6 @@
         "test.ts"
     ],
     "public": false,
-    "preferredEditor": "tsprj"
+    "preferredEditor": "tsprj",
+    "installedVersion": "workspace:e083d0a3-18fc-434f-953f-70c02b270f90"
 }
