@@ -16,7 +16,8 @@ namespace RobotCar_Keyestudio {
 
 
     /**
-     * @param speed Magnitude of the motor speed [0, 100], negative number is backward motor rotation.
+     * Move the robot in a straight line, forward or backawards
+     * @param speed Magnitude of the motor speed [-100, 100], negative number is backward motor rotation.
      */
     //% block
     export function move(speed: number): void {
@@ -25,6 +26,7 @@ namespace RobotCar_Keyestudio {
     }
 
     /**
+     * Spin the robot
      * @param speed Magnitude of the spin for motor speed [-100, 100]; 100 is full right hand spin.
      */
     //% block
@@ -34,6 +36,7 @@ namespace RobotCar_Keyestudio {
     }
 
     /**
+     * Differential steering 2WD 
      * @param speed Magnitude of the motors speed [0, 100].
      * @param steering Magnitude of the steering [-100, 100]; 100 is turning right with right wheel stopped
      */
