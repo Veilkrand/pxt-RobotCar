@@ -10,8 +10,8 @@ PCA9685.init(67, 0)
 /**
  * RobotCar_Keyestudio blocks
  */
-//% weight=100 color=#0fbc11 icon="\uf63c"
-//icon = "\uf63c"
+//% weight=100 color=#0fbc11 icon="\uf544"
+
 namespace RobotCar_Keyestudio {
 
 
