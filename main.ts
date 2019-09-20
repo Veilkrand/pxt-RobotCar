@@ -97,39 +97,45 @@ namespace RobotCar_Keyestudio {
     // * Front Leds Control
     // 
 
+    /**
+     * Control the front leds colors [0,255]
+     * 
+     */
+    //%block
+    export function setLedRGB(R: number, G: number, B: number): void {
+
+        let r = Math.map(R, 0, 255, 100, 0)
+        let g = Math.map(G, 0, 255, 100, 0)
+        let b = Math.map(B, 0, 255, 100, 0)
+
+        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED6, g, 67)
+        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED5, b, 67)
+        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED7, r, 67)
+    }
+
     //%block
     export function ledShowRed(): void {
-        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED5, 100, 67)
-        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED6, 100, 67)
-        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED7, 0, 67)
+        setLedRGB(255, 0, 0)
     }
 
     //%block
     export function ledShowGreen(): void {
-        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED5, 100, 67)
-        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED6, 0, 67)
-        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED7, 100, 67)
+        setLedRGB(0, 255, 0)
     }
 
     //%block
     export function ledShowBlue(): void {
-        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED5, 0, 67)
-        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED6, 100, 67)
-        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED7, 100, 67)
-    }
-
-    //%block
-    export function ledOff(): void {
-        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED5, 0, 67)
-        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED6, 0, 67)
-        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED7, 0, 67)
+        setLedRGB(0, 255, 0)
     }
 
     //%block
     export function ledShowWhite(): void {
-        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED5, 100, 67)
-        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED6, 100, 67)
-        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED7, 100, 67)
+        setLedRGB(255, 255, 255)
+    }
+
+    //%block
+    export function ledOff(): void {
+        setLedRGB(0, 0, 0)
     }
 
     // ******
