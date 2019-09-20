@@ -93,7 +93,44 @@ namespace RobotCar_Keyestudio {
         PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED4, Math.abs(speed), 67)
     }
 
+    // ******
+    // * Front Leds Control
+    // 
 
+    //%block
+    export function ledShowRed(): void {
+        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED5, 100, 67)
+        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED6, 100, 67)
+        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED7, 0, 67)
+    }
+
+    //%block
+    export function ledShowGreen(): void {
+        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED5, 100, 67)
+        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED6, 0, 67)
+        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED7, 100, 67)
+    }
+
+    //%block
+    export function ledShowBlue(): void {
+        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED5, 0, 67)
+        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED6, 100, 67)
+        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED7, 100, 67)
+    }
+
+    //%block
+    export function ledOff(): void {
+        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED5, 0, 67)
+        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED6, 0, 67)
+        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED7, 0, 67)
+    }
+
+    //%block
+    export function ledShowWhite(): void {
+        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED5, 100, 67)
+        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED6, 100, 67)
+        PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED7, 100, 67)
+    }
 
     // ******
     // * Sonar handling with median filter
