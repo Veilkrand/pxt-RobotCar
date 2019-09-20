@@ -4,7 +4,8 @@
     "description": "Easy extension to control the Keyestudio Robot Car for micro:bit.",
     "dependencies": {
         "core": "*",
-        "pca9685": "github:jdarling/pxt-pca9685#3d08a2d73002bf8d3525894bb731bc8fe82f6673"
+        "pca9685": "github:jdarling/pxt-pca9685#3d08a2d73002bf8d3525894bb731bc8fe82f6673",
+        "pxt-sonar": "github:microsoft/pxt-sonar#v0.0.5"
     },
     "files": [
         "README.md",

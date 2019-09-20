@@ -1,22 +1,17 @@
 
-/**
- * Use this file to define custom functions and blocks.
- * Read more at https://makecode.microbit.org/blocks/custom
- */
-
 PCA9685.init(67, 0)
-//led.enable(false)
+
 
 /**
  * RobotCar_Keyestudio blocks
  */
 //% weight=100 color=#0fbc11 icon="\uf544"
-
 namespace RobotCar_Keyestudio {
 
 
     /**
-     * Move the robot in a straight line, forward or backawards
+     * Move the robot in a straight line, forward or backwards.
+     * 
      * @param speed Magnitude of the motor speed [-100, 100], negative number is backward motor rotation.
      */
     //% block
@@ -26,7 +21,8 @@ namespace RobotCar_Keyestudio {
     }
 
     /**
-     * Spin the robot
+     * Spin the robot.
+     * 
      * @param speed Magnitude of the spin for motor speed [-100, 100]; 100 is full right hand spin.
      */
     //% block
@@ -36,7 +32,8 @@ namespace RobotCar_Keyestudio {
     }
 
     /**
-     * Differential steering 2WD 
+     * Differential steering 2WD.
+     * 
      * @param speed Magnitude of the motors speed [0, 100].
      * @param steering Magnitude of the steering [-100, 100]; 100 is turning right with right wheel stopped
      */
@@ -63,7 +60,10 @@ namespace RobotCar_Keyestudio {
         leftMotor(left_speed)
         rightMotor(right_speed)
     }
-
+    /** 
+     * Stop the robot movement. 
+     * 
+    */
     //%block
     export function stop(): void {
         move(0)
@@ -91,6 +91,62 @@ namespace RobotCar_Keyestudio {
             PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED3, 100, 67)
         }
         PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED4, Math.abs(speed), 67)
+    }
+
+
+
+    // ******
+    // * Sonar handling with median filter
+
+    // Globals
+    let sonar_measures: number[] = []
+    // Constants
+    let SONAR_MEDIAN_SIZE = 2 //3
+
+    /**
+     * The "median" is the "middle" value in the list of numbers.
+     *
+     * @param {Array} numbers An array of numbers.
+     * @return {Number} The calculated median value from the specified numbers.
+     */
+    function median(numbers: number[]) {
+        // median of [3, 5, 4, 4, 1, 1, 2, 3] = 3
+        let median = 0
+        let numsLen = numbers.length
+        numbers.sort();
+
+        if (
+            numsLen % 2 === 0 // is even
+        ) {
+            // average of two middle numbers
+            median = (numbers[numsLen / 2 - 1] + numbers[numsLen / 2]) / 2;
+        } else { // is odd
+            // middle number only
+            median = numbers[(numsLen - 1) / 2];
+        }
+
+        return median;
+    }
+
+    /**
+     * Ping the sonar and return a median-filtered distance result in centimeters.
+     * 
+     */
+    //% block
+    export function ping(): number {
+
+        let measure = sonar.ping(
+            DigitalPin.P14,
+            DigitalPin.P15,
+            PingUnit.Centimeters
+        )
+
+        if (measure > 0) {
+            sonar_measures.push(measure)
+            if (sonar_measures.length > SONAR_MEDIAN_SIZE) { sonar_measures.shift() }
+        }
+
+        return median(sonar_measures)
     }
 
 }
