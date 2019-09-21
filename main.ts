@@ -1,5 +1,4 @@
-
-// Initialize the pins
+// Initialize the chip address for PCA9685 controller
 PCA9685.init(67, 0)
 
 /**
@@ -9,8 +8,10 @@ PCA9685.init(67, 0)
 //% groups=['Motors', 'Sonar', 'Leds']
 namespace RobotCar_Keyestudio {
 
-    // Pin Constants
-    
+    // Pin Constants for all modules except PCA9685 control
+    const PIN_SONAR_TRIG = DigitalPin.P14
+    const PIN_SONAR_ECHO = DigitalPin.P15
+
 
     export namespace Motors {
 
@@ -109,12 +110,14 @@ namespace RobotCar_Keyestudio {
         // 
 
         /**
-         * Control the front leds colors [0,255]
-         * 
+         * Control the front leds colors [0,255].
+         * @param R Red light intensity [0,255]
+         * @param G Green light intensity [0,255]
+         * @param B Blue light intensity [0,255]
          */
         //%block
         //% group="Leds"
-        export function setLedRGB(R: number, G: number, B: number): void {
+        export function setRGB(R: number, G: number, B: number): void {
 
             let r = Math.map(R, 0, 255, 100, 0)
             let g = Math.map(G, 0, 255, 100, 0)
@@ -127,32 +130,32 @@ namespace RobotCar_Keyestudio {
 
         //%block
         //% group="Leds"
-        export function ledShowRed(): void {
-            setLedRGB(255, 0, 0)
+        export function showRed(): void {
+            setRGB(255, 0, 0)
         }
 
         //%block
         //% group="Leds"
-        export function ledShowGreen(): void {
-            setLedRGB(0, 255, 0)
+        export function showGreen(): void {
+            setRGB(0, 255, 0)
         }
 
         //%block
         //% group="Leds"
-        export function ledShowBlue(): void {
-            setLedRGB(0, 255, 0)
+        export function showBlue(): void {
+            setRGB(0, 255, 0)
         }
 
         //%block
         //% group="Leds"
-        export function ledShowWhite(): void {
-            setLedRGB(255, 255, 255)
+        export function showWhite(): void {
+            setRGB(255, 255, 255)
         }
 
         //%block
         //% group="Leds"
-        export function ledOff(): void {
-            setLedRGB(0, 0, 0)
+        export function ledsOff(): void {
+            setRGB(0, 0, 0)
         }
     }
 
@@ -197,10 +200,10 @@ namespace RobotCar_Keyestudio {
         //% block
         //% group="Sonar"
         export function ping(): number {
-
+             
             let measure = sonar.ping(
-                DigitalPin.P14,
-                DigitalPin.P15,
+                PIN_SONAR_TRIG,
+                PIN_SONAR_ECHO,
                 PingUnit.Centimeters
             )
 
