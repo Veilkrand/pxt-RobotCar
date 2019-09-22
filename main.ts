@@ -1,16 +1,23 @@
 // Initialize the chip address for PCA9685 controller
 PCA9685.init(67, 0)
 
+
 /**
  * RobotCar_Keyestudio blocks
  */
 //% weight=100 color=#0fbc11 icon="\uf1b9"
-//% groups=['Motors', 'Sonar', 'Leds']
+//% groups=['Motors', 'Sonar', 'Leds', 'IR Sensors']
 namespace RobotCar_Keyestudio {
 
-    // Pin Constants for all modules except PCA9685 control
+    // Pins Constant for all modules except PCA9685 control
+    const IR_SENSOR_LEFT = DigitalPin.P2
+    const IR_SENSOR_RIGHT = DigitalPin.P11
     const PIN_SONAR_TRIG = DigitalPin.P14
     const PIN_SONAR_ECHO = DigitalPin.P15
+
+    // Initialize pins
+    pins.setPull(IR_SENSOR_LEFT, PinPullMode.PullUp)
+    pins.setPull(IR_SENSOR_RIGHT, PinPullMode.PullUp)
 
 
     export namespace Motors {
@@ -20,8 +27,11 @@ namespace RobotCar_Keyestudio {
          * 
          * @param speed Magnitude of the motor speed [-100, 100], negative number is backward motor rotation.
          */
-        //% block
+
+        //% block="move at $speed \\% speed"
+        //% speed.shadow="speedPicker"
         //% group="Motors"
+        //% weight=100
         export function move(speed: number): void {
             rightMotor(speed)
             leftMotor(speed)
@@ -32,7 +42,9 @@ namespace RobotCar_Keyestudio {
          * 
          * @param speed Magnitude of the spin for motor speed [-100, 100]; 100 is full right hand spin.
          */
-        //% block
+        //% block="spin at $speed \\%"
+        //% speed.min=-100 steering.max=100
+        //% speed.shadow=turnRatioPicker
         //% group="Motors"
         export function spin(speed: number): void {
             rightMotor(-speed)
@@ -45,8 +57,13 @@ namespace RobotCar_Keyestudio {
          * @param speed Magnitude of the motors speed [0, 100].
          * @param steering Magnitude of the steering [-100, 100]; 100 is turning right with right wheel stopped
          */
-        //% block
+
+
+        //% block="steer $speed $steering"
         //% group="Motors"
+        //% speed.shadow="speedPicker"
+        //% steering.min=-100 steering.max=100
+        //% steering.shadow=turnRatioPicker
         export function steer(speed: number, steering: number): void {
 
             steering = Math.constrain(steering, -100, 100)
@@ -115,7 +132,7 @@ namespace RobotCar_Keyestudio {
          * @param G Green light intensity [0,255]
          * @param B Blue light intensity [0,255]
          */
-        //%block
+        //%block="Set RGB"
         //% group="Leds"
         export function setRGB(R: number, G: number, B: number): void {
 
@@ -159,6 +176,33 @@ namespace RobotCar_Keyestudio {
         }
     }
 
+    export namespace IrSensors {
+        // ******
+        // * IR Sensors handling for obstacle detection
+
+        //%block
+        //% group="IR Sensors"
+        export function isLeftBlocked(): boolean {
+            if (pins.digitalReadPin(IR_SENSOR_LEFT) == 0) {
+                return true
+            } else {
+                return false
+            }
+        }
+
+        //%block
+        //% group="IR Sensors"
+        export function isRightBlocked(): boolean {
+            if (pins.digitalReadPin(IR_SENSOR_RIGHT) == 0) {
+                return true
+            } else {
+                return false
+            }
+        }
+
+
+    }
+
     export namespace Sonar {
         // ******
         // * Sonar handling with median filter
@@ -200,7 +244,7 @@ namespace RobotCar_Keyestudio {
         //% block
         //% group="Sonar"
         export function ping(): number {
-             
+
             let measure = sonar.ping(
                 PIN_SONAR_TRIG,
                 PIN_SONAR_ECHO,
