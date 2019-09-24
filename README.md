@@ -47,7 +47,9 @@ Return true if the sensor is blocked by an obstacle, false otherwise.
 
 @return {boolean} is sensor blocked?
 
-## ping()
+## Sonar
+
+#### ping()
 Ping the sonar and return a median-filtered distance result in centimeters.
 
 @return {number} distance in cm to obstacle
