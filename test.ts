@@ -25,8 +25,10 @@
             // Check IR sensors
             if (RobotCar_Keyestudio.IrSensors.isLeftBlocked()) {
                 RobotCar_Keyestudio.Motors.steer(30, 50)
+                basic.pause(500)
             } else if (RobotCar_Keyestudio.IrSensors.isRightBlocked()) {
                 RobotCar_Keyestudio.Motors.steer(-30, 50)
+                basic.pause(500)
             }
 
         } else if (distance < 8) {
