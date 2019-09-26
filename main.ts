@@ -132,7 +132,7 @@ namespace RobotCar_Keyestudio {
          * @param G Green light intensity [0,255]
          * @param B Blue light intensity [0,255]
          */
-        //%block="Set RGB"
+        //%block="Set Led RGB"
         //% group="Leds"
         export function setRGB(R: number, G: number, B: number): void {
 
@@ -145,31 +145,31 @@ namespace RobotCar_Keyestudio {
             PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED7, r, 67)
         }
 
-        //%block
+        //%block="Led Show Red"
         //% group="Leds"
         export function showRed(): void {
             setRGB(255, 0, 0)
         }
 
-        //%block
+        //%block="Led Show Green"
         //% group="Leds"
         export function showGreen(): void {
             setRGB(0, 255, 0)
         }
 
-        //%block
+        //%block="Led Show Blue"
         //% group="Leds"
         export function showBlue(): void {
-            setRGB(0, 255, 0)
+            setRGB(0, 0, 255)
         }
 
-        //%block
+        //%block="Led Show White"
         //% group="Leds"
         export function showWhite(): void {
             setRGB(255, 255, 255)
         }
 
-        //%block
+        //%block="Leds Off"
         //% group="Leds"
         export function ledsOff(): void {
             setRGB(0, 0, 0)
@@ -199,6 +199,9 @@ namespace RobotCar_Keyestudio {
                 return false
             }
         }
+
+
+
 
 
     }
