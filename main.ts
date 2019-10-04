@@ -75,12 +75,17 @@ namespace RobotCar_Keyestudio {
             if (steering > 0) {
                 // map current steering to current speed
                 //let steering_speed = Math.map(steering, 0, 100, 0, speed)
-                left_speed -= steering
+                right_speed -= steering
+                if (right_speed < 0 ){
+                    right_speed = 0
+                }
 
             } else if (steering < 0) {
                 //let steering_speed = Math.map(steering, 0, -100, 0, speed)
-                right_speed -= steering * -1
-
+                left_speed -= steering * -1
+                if (left_speed < 0) {
+                    left_speed = 0
+                }
             }
 
             leftMotor(left_speed)
