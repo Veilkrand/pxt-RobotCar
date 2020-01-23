@@ -19,6 +19,65 @@ namespace RobotCar_Keyestudio {
     pins.setPull(IR_SENSOR_LEFT, PinPullMode.PullUp)
     pins.setPull(IR_SENSOR_RIGHT, PinPullMode.PullUp)
 
+    export namespace Moving {
+
+        /**
+         * Move the robot in a straight line, at 50% speed for a duration in miliseconds.
+         * 
+         * @param ms Duration in miliseconds of the moving.
+         */
+        //% block="move forward for $ms ms"
+        //% ms.shadow="timePicker"
+        //% group="Moving"
+        //% weight=100
+        export function moveForward(ms: number): void {
+            Motors.move(50)
+            basic.pause(ms)
+            Motors.stop()
+        }
+
+        /**
+         * Move the robot in a straight line, at 50% speed for a duration in miliseconds.
+         * 
+         * @param ms Duration in miliseconds of the moving.
+         */
+        //% block="move backward for $ms ms"
+        //% ms.shadow="timePicker"
+        //% group="Moving"
+        //% weight=100
+        export function moveBackwards(ms: number): void {
+            Motors.move(-50)
+            basic.pause(ms)
+            Motors.stop()
+        }
+
+        /**
+         * Turn the robot in degrees, at 50% speed.
+         * 
+         * @param deg Degrees of the turn [-180, 180].
+         */
+        //% block="turn $deg degrees"
+        //% deg.min=-180 steering.max=180
+        //% deg.shadow="protractorPicker"
+        //% group="Moving"
+        //% weight=100
+        export function turn(deg: number): void {
+            let _spin
+            if (deg > 0) {
+                _spin = 50
+            } else {
+                _spin = -50
+            }
+
+            Motors.spin(_spin)
+            basic.pause(100)
+            Motors.stop()
+            
+        }
+
+
+
+    }
 
     export namespace Motors {
 
@@ -27,7 +86,6 @@ namespace RobotCar_Keyestudio {
          * 
          * @param speed Magnitude of the motor speed [-100, 100], negative number is backward motor rotation.
          */
-
         //% block="move at $speed \\% speed"
         //% speed.shadow="speedPicker"
         //% group="Motors"
@@ -54,8 +112,8 @@ namespace RobotCar_Keyestudio {
         /**
          * Differential steering 2WD.
          * 
-         * @param speed Magnitude of the motors speed [0, 100]; .
-         * @param steering Magnitude of the steering [-100, 100]; 100 is turning right with right wheel stopped.
+         * @param steering Magnitude of the steering [-100, 100] 100 is turning right with right wheel stopped.
+         * @param speed Magnitude of the motors speed [0, 100] .
          */
 
 
@@ -73,7 +131,7 @@ namespace RobotCar_Keyestudio {
             let right_speed = speed
 
             if (steering > 0) {
-                
+
                 if (speed > 0) {
                     right_speed -= steering
                     if (right_speed < 0) {
@@ -85,9 +143,9 @@ namespace RobotCar_Keyestudio {
                         right_speed = 0
                     }
                 }
-                
+
             } else if (steering < 0) {
-                
+
                 if (speed > 0) {
                     left_speed -= steering * -1
                     if (left_speed < 0) {
@@ -99,7 +157,7 @@ namespace RobotCar_Keyestudio {
                         left_speed = 0
                     }
                 }
-                
+
             }
 
             leftMotor(left_speed)
