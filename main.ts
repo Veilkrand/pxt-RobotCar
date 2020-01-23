@@ -54,12 +54,12 @@ namespace RobotCar_Keyestudio {
         /**
          * Differential steering 2WD.
          * 
-         * @param speed Magnitude of the motors speed [0, 100].
-         * @param steering Magnitude of the steering [-100, 100]; 100 is turning right with right wheel stopped
+         * @param speed Magnitude of the motors speed [0, 100]; .
+         * @param steering Magnitude of the steering [-100, 100]; 100 is turning right with right wheel stopped.
          */
 
 
-        //% block="steer $speed $steering"
+        //% block="steer $steering at $speed \\%"
         //% group="Motors"
         //% speed.shadow="speedPicker"
         //% steering.min=-100 steering.max=100
@@ -73,19 +73,33 @@ namespace RobotCar_Keyestudio {
             let right_speed = speed
 
             if (steering > 0) {
-                // map current steering to current speed
-                //let steering_speed = Math.map(steering, 0, 100, 0, speed)
-                right_speed -= steering
-                if (right_speed < 0 ){
-                    right_speed = 0
+                
+                if (speed > 0) {
+                    right_speed -= steering
+                    if (right_speed < 0) {
+                        right_speed = 0
+                    }
+                } else if (speed < 0) {
+                    right_speed += steering
+                    if (right_speed > 0) {
+                        right_speed = 0
+                    }
                 }
-
+                
             } else if (steering < 0) {
-                //let steering_speed = Math.map(steering, 0, -100, 0, speed)
-                left_speed -= steering * -1
-                if (left_speed < 0) {
-                    left_speed = 0
+                
+                if (speed > 0) {
+                    left_speed -= steering * -1
+                    if (left_speed < 0) {
+                        left_speed = 0
+                    }
+                } else if (speed < 0) {
+                    left_speed += steering * -1
+                    if (left_speed > 0) {
+                        left_speed = 0
+                    }
                 }
+                
             }
 
             leftMotor(left_speed)
