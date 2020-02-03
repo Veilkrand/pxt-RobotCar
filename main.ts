@@ -19,65 +19,66 @@ namespace RobotCar_Keyestudio {
     pins.setPull(IR_SENSOR_LEFT, PinPullMode.PullUp)
     pins.setPull(IR_SENSOR_RIGHT, PinPullMode.PullUp)
 
-    export namespace Moving {
+    // export namespace Moving {
 
-        /**
-         * Move the robot in a straight line, at 50% speed for a duration in miliseconds.
-         * 
-         * @param ms Duration in miliseconds of the moving.
-         */
-        //% block="move forward for $ms ms"
-        //% ms.shadow="timePicker"
-        //% group="Moving"
-        //% weight=100
-        export function moveForward(ms: number): void {
-            Motors.move(50)
-            basic.pause(ms)
-            Motors.stop()
-        }
+    //     /**
+    //      * Move the robot in a straight line, at 50% speed for a duration in miliseconds.
+    //      * 
+    //      * @param ms Duration in miliseconds of the moving.
+    //      */
+    //     //% block="move forward for $ms ms"
+    //     //% ms.shadow="timePicker"
+    //     //% group="Moving"
+    //     //% weight=100
+    //     export function moveForward(ms: number): void {
+    //         Motors.move(50)
+    //         basic.pause(ms)
+    //         Motors.stop()
+    //     }
 
-        /**
-         * Move the robot in a straight line, at 50% speed for a duration in miliseconds.
-         * 
-         * @param ms Duration in miliseconds of the moving.
-         */
-        //% block="move backward for $ms ms"
-        //% ms.shadow="timePicker"
-        //% group="Moving"
-        //% weight=100
-        export function moveBackwards(ms: number): void {
-            Motors.move(-50)
-            basic.pause(ms)
-            Motors.stop()
-        }
+    //     /**
+    //      * Move the robot in a straight line, at 50% speed for a duration in miliseconds.
+    //      * 
+    //      * @param ms Duration in miliseconds of the moving.
+    //      */
+    //     //% block="move backward for $ms ms"
+    //     //% ms.shadow="timePicker"
+    //     //% group="Moving"
+    //     //% weight=100
+    //     export function moveBackwards(ms: number): void {
+    //         Motors.move(-50)
+    //         basic.pause(ms)
+    //         Motors.stop()
+    //     }
 
-        /**
-         * Turn the robot in degrees, at 50% speed.
-         * 
-         * @param deg Degrees of the turn [-180, 180].
-         */
-        //% block="turn $deg degrees"
-        //% deg.min=-180 steering.max=180
-        //% deg.shadow="protractorPicker"
-        //% group="Moving"
-        //% weight=100
-        export function turn(deg: number): void {
-            let _spin
-            if (deg > 0) {
-                _spin = 50
-            } else {
-                _spin = -50
-            }
+    //     /**
+    //      * Turn the robot in degrees, at 50% speed.
+    //      * 
+    //      * @param deg Degrees of the turn [-180, 180].
+    //      */
+    //     //% block="turn $deg degrees"
+    //     //% deg.min=-180 steering.max=180
+    //     //% deg.shadow="protractorPicker"
+    //     //% group="Moving"
+    //     //% weight=100
+    //     export function turn(deg: number): void {
+    //         let _spin
+    //         if (deg > 0) {
+    //             _spin = 50
+    //         } else {
+    //             _spin = -50
+    //         }
 
-            Motors.spin(_spin)
-            basic.pause(100)
-            Motors.stop()
-            
-        }
+    //         Motors.spin(_spin)
+    //         basic.pause(100)
+    //         Motors.stop()
+
+    //     }
 
 
 
-    }
+    // }
+
 
     export namespace Motors {
 
@@ -209,7 +210,10 @@ namespace RobotCar_Keyestudio {
          * @param G Green light intensity [0,255]
          * @param B Blue light intensity [0,255]
          */
-        //%block="Set Led RGB"
+        //% block="Set Led Red %B Green %G Blue %B"
+        //% R.min=0 R.max=255
+        //% G.min=0 G.max=255
+        //% B.min=0 B.max=255
         //% group="Leds"
         export function setRGB(R: number, G: number, B: number): void {
 
