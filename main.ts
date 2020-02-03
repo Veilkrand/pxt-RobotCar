@@ -101,9 +101,9 @@ namespace RobotCar_Keyestudio {
          * 
          * @param speed Magnitude of the spin for motor speed [-100, 100]; 100 is full right hand spin.
          */
-        //% block="spin at $speed \\%"
+        //% block="spin at $speed \\% speed"
         //% speed.min=-100 steering.max=100
-        //% speed.shadow=turnRatioPicker
+        //% speed.shadow=speedPicker
         //% group="Motors"
         export function spin(speed: number): void {
             rightMotor(-speed)
@@ -118,7 +118,7 @@ namespace RobotCar_Keyestudio {
          */
 
 
-        //% block="steer $steering at $speed \\%"
+        //% block="Steer $steering at $speed \\% speed"
         //% group="Motors"
         //% speed.shadow="speedPicker"
         //% steering.min=-100 steering.max=100
