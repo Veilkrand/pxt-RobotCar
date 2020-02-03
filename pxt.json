@@ -1,6 +1,6 @@
 {
     "name": "pxt-robotcar",
-    "version": "0.0.13",
+    "version": "0.0.14",
     "description": "Easy extension to control the Keyestudio Robot Car for micro:bit.",
     "dependencies": {
         "core": "*",
