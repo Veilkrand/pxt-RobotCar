@@ -210,7 +210,7 @@ namespace RobotCar_Keyestudio {
          * @param G Green light intensity [0,255]
          * @param B Blue light intensity [0,255]
          */
-        //% block="Set Led Red %B Green %G Blue %B"
+        //% block="Set Led Red %R Green %G Blue %B"
         //% R.min=0 R.max=255
         //% G.min=0 G.max=255
         //% B.min=0 B.max=255
